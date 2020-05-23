@@ -25,21 +25,33 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    setBearer({}, bearer) {
+    setBearer({ }, bearer) {
       api.defaults.headers.authorization = bearer;
     },
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
     async addKeep({ commit, dispatch }, newKeep) {
-      let res = await api.post("keeps", newKeep)
-      dispatch("getKeeps")
+      try {
+        let res = await api.post("keeps", newKeep)
+        dispatch("getKeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
     },
 
     async getKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps")
         commit("setKeeps", res.data)
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    async deleteKeep({ commit, dispatch }, id) {
+      try {
+        let res = await api.delete("keeps/" + id);
+        this.dispatch("getKeeps")
       } catch (err) {
         alert(JSON.stringify(err));
       }
