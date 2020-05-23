@@ -26,7 +26,14 @@ namespace Keepr.Controllers
     {
       try
       {
-        return Ok(_vs.Get());
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("You must be logged in to get your vaults.");
+        }
+        string userId = user.Value;
+        //return Ok(_cs.GetByUserId(userId));
+        return Ok(_vs.Get(userId));
       }
       catch (Exception e)
       {
