@@ -85,7 +85,7 @@ namespace Keepr.Controllers
       }
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPut("{id}")]
     public ActionResult<Keep> Edit(int id, [FromBody] Keep keepToUpdate)
     {
@@ -97,7 +97,7 @@ namespace Keepr.Controllers
         if (user == null)
         {
           //throw new Exception("must be logged in");
-          //return Ok(_ks.Edit(keepToUpdate, ""));
+          return Ok(_ks.Edit(keepToUpdate, ""));
         }
         else 
         {

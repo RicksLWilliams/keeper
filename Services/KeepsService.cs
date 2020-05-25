@@ -57,7 +57,7 @@ namespace Keepr.Services
       Keep foundKeep = GetOne(keepToUpdate.Id);
       //if (foundKeep.UserId != userId)
       //{
-        if (foundKeep.Keeps == 1)
+        if (keepToUpdate.Keeps == 1)
         {
           if (_repo.AddKeep(keepToUpdate))
           {
@@ -65,9 +65,9 @@ namespace Keepr.Services
             return foundKeep;
           }
         }
-        if (foundKeep.Views == 1)
+        if (keepToUpdate.Views == 1)
         {
-          if (_repo.AddKeep(keepToUpdate))
+          if (_repo.AddView(keepToUpdate))
           {
             foundKeep.Views++;
             return foundKeep;

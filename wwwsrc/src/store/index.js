@@ -17,11 +17,15 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    publicKeeps: []
+    publicKeeps: [],
+    vaults:[]
   },
   mutations: {
     setKeeps(state, keeps) {
       state.publicKeeps = keeps
+    },
+    setVaults(state, vaults) {
+      state.vaults = vaults
     },
   },
   actions: {
@@ -39,7 +43,6 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-
     async getKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps")
@@ -56,6 +59,41 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
+    async viewKeep({ commit, dispatch }, id) {
+      try {
+        let newKeep = { id: id , views: 1};
+        let res = await api.put("keeps/" + id, newKeep)
+        dispatch("getKeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    async keepKeep({ commit, dispatch }, id) {
+      try {
+        let newKeep = { id: id , keeps: 1};
+        let res = await api.put("keeps/" + id, newKeep)
+        dispatch("getKeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    async getVaults({ commit, dispatch }) {
+      try {
+        let res = await api.get("vaults")
+        commit("setVaults", res.data)
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    async deleteVault({ commit, dispatch }, id) {
+      try {
+        let res = await api.delete("vaults/" + id);
+        this.dispatch("getVaults")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+
 
   }
 });
