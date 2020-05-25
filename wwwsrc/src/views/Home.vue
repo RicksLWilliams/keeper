@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home container-fluid">
     <h1>Welcome Home</h1>
 
     <form @submit.prevent="addKeep()">
@@ -48,7 +48,13 @@
       <button type="submit" class="btn btn-primary">Add Keep</button>
     </form>
 
-    <div class="row justify-content-center">
+    <div class="row">
+      <div>
+        <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
+      </div>
+    </div>
+
+    <!-- <div class="row justify-content-center">
       <div class="col-3 m-3 border rounded" v-for="keep in keeps" :key="keep.id">
         <button type="button" class="close text-danger" @click="deleteKeep()">
           <span>&times;</span>
@@ -63,11 +69,12 @@
         <button type="button" class="btn btn-primary">Share</button>
         <button type="button" class="btn btn-primary">Keep</button>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
 <script>
+import Keep from "../components/Keep";
 export default {
   name: "home",
   data() {
@@ -102,6 +109,7 @@ export default {
       this.$store.dispatch("addKeep", this.newKeep);
       this.newKeep = {};
     }
-  }
+  },
+  components: { Keep }
 };
 </script>
