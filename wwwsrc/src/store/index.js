@@ -92,6 +92,15 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
+    async addVaultKeep({ commit, dispatch }, newVaultKeep) {
+      try {
+        let res = await api.post("vaultKeeps", newVaultKeep)
+        //do I need to do this now?
+        //dispatch("getVaultKeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
 
 
   }

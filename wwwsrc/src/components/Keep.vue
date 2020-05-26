@@ -16,6 +16,17 @@
         <button type="button" class="btn btn-primary" @click="editKeep('views')">View</button>
         <button type="button" class="btn btn-primary" @click="editKeep('shares')">Share</button>
         <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep</button>
+
+        <select class="select" v-model="selected" @change="vaultKeep()">
+          <option disabled value>
+            <h3 class="edit">Keep</h3>
+          </option>
+          <option
+            v-for="listInfo in listItems"
+            :key="listInfo.id"
+            :value="listInfo.id"
+          >{{listInfo.name}}</option>
+        </select>
       </div>
     </div>
   </div>
@@ -26,7 +37,7 @@ export default {
   name: "Keep",
   props: ["keepData"],
   data() {
-    return {};
+     return { selected: "" };
   },
   methods: {
     deleteKeep() {
@@ -39,6 +50,14 @@ export default {
       keepData[data] = 1;
       //console.log('editKeep', keepData)
       this.$store.dispatch("editKeep", keepData);
+    },
+    vaultKeep(){
+      console.log("vaultKeep-vault", this.selected)
+      console.log("vaultKeep-keep", this.keepData.id)
+      let newVaultKeep = {};
+      newVaultKeep.vaultId = this.selected
+      newVaultKeep.keepId = this.keepData.id
+      this.$store.dispatch("addVaultKeep", newVaultKeep);
     }
   },
   computed: {
@@ -48,7 +67,11 @@ export default {
         return "";
       }
       return this.$auth.userInfo.sub;
-    }
+    },
+    listItems() {
+      //console.log("listItems",this.$store.state.lists )
+      return this.$store.state.vaults;
+    },
   }
 };
 </script>

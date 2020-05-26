@@ -48,7 +48,7 @@
         />
       </div>
       <button type="submit" class="btn btn-primary">Add Keep</button>
-    </form> -->
+    </form>-->
 
     <div class="row">
       <div>
@@ -71,7 +71,7 @@
         <button type="button" class="btn btn-primary">Share</button>
         <button type="button" class="btn btn-primary">Keep</button>
       </div>
-    </div> -->
+    </div>-->
     <!-- <KeepAdd></KeepAdd> -->
   </div>
 </template>
@@ -88,6 +88,9 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getKeeps");
+    if (this.$auth.userInfo.sub) {
+      this.$store.dispatch("getVaults");
+    }
   },
   computed: {
     user() {
