@@ -18,7 +18,8 @@ let api = Axios.create({
 export default new Vuex.Store({
   state: {
     publicKeeps: [],
-    vaults:[]
+    vaults:[],
+    vaultKeeps:[],
   },
   mutations: {
     setKeeps(state, keeps) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     setVaults(state, vaults) {
       state.vaults = vaults
+    },
+    setVaultKeeps(state, vaultKeeps) {
+      state.vaultKeeps = vaultKeeps
     },
   },
   actions: {
@@ -97,6 +101,15 @@ export default new Vuex.Store({
         let res = await api.post("vaultKeeps", newVaultKeep)
         //do I need to do this now?
         //dispatch("getVaultKeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+    //getVaultKeeps
+    async getVaultKeeps({ commit, dispatch }, id) {
+      try {
+        let res = await api.get("vaults/" + id +"/keeps")
+        commit("setVaultKeeps", res.data)
       } catch (err) {
         alert(JSON.stringify(err));
       }
