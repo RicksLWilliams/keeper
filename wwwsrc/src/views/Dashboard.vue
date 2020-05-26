@@ -2,17 +2,20 @@
   <div class="dashboard container-fluid">
     <h1>WELCOME TO THE DASHBOARD</h1>
 
-    <!-- public {{ publicKeeps }} user {{ userKeeps }} -->
-    <!-- <div class="row"> -->
-      <div>
-        <vault v-for="vault in vaults" :vaultData="vault" :key="vault.id"></vault>
-      </div>
-    <!-- </div> -->
+    <VaultAdd></VaultAdd>
+
+    <div>
+      <vault v-for="vault in vaults" :vaultData="vault" :key="vault.id"></vault>
+    </div>
+
+    <KeepAdd></KeepAdd>
   </div>
 </template>
 
 <script>
 import Vault from "../components/Vault";
+import VaultAdd from "../components/VaultAdd";
+import KeepAdd from "../components/KeepAdd";
 export default {
   mounted() {
     this.$store.dispatch("getVaults");
@@ -25,7 +28,7 @@ export default {
       return this.$store.state.vaults;
     }
   },
-  components: { Vault }
+  components: { Vault, VaultAdd, KeepAdd }
 };
 </script>
 

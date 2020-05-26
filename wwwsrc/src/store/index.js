@@ -84,6 +84,14 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
+    async addVault({ commit, dispatch }, newVault) {
+      try {
+        let res = await api.post("vaults", newVault)
+        dispatch("getVaults")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
 
 
   }

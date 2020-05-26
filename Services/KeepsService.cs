@@ -55,37 +55,31 @@ namespace Keepr.Services
     internal Keep Edit(Keep keepToUpdate, string userId)
     {
       Keep foundKeep = GetOne(keepToUpdate.Id);
-      //if (foundKeep.UserId != userId)
-      //{
-        if (keepToUpdate.Keeps == 1)
+      if (keepToUpdate.Keeps == 1)
+      {
+        if (_repo.AddKeep(keepToUpdate))
         {
-          if (_repo.AddKeep(keepToUpdate))
-          {
-            foundKeep.Keeps++;
-            return foundKeep;
-          }
+          foundKeep.Keeps++;
+          return foundKeep;
         }
-        if (keepToUpdate.Views == 1)
+      }
+      if (keepToUpdate.Views == 1)
+      {
+        if (_repo.AddView(keepToUpdate))
         {
-          if (_repo.AddView(keepToUpdate))
-          {
-            foundKeep.Views++;
-            return foundKeep;
-          }
+          foundKeep.Views++;
+          return foundKeep;
         }
-        if (keepToUpdate.Shares == 1)
+      }
+      if (keepToUpdate.Shares == 1)
+      {
+        if (_repo.AddShare(keepToUpdate))
         {
-          if (_repo.AddShare(keepToUpdate))
-          {
-            foundKeep.Shares++;
-            return foundKeep;
-          }
+          foundKeep.Shares++;
+          return foundKeep;
         }
-      //}
-      //   if (_repo.Edit(keepToUpdate, userId))
-      //   {
-      //     return keepToUpdate;
-      //   }
+      }
+
       throw new Exception("error on edit keep");
     }
 
