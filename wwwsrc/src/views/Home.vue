@@ -2,9 +2,9 @@
   <div class="home container-fluid">
     <h1>Welcome Home</h1>
 
-    <KeepAdd></KeepAdd>
+    <!-- <KeepAdd></KeepAdd> -->
 
-    <form @submit.prevent="addKeep()">
+    <!-- <form @submit.prevent="addKeep()">
       <div class="form-group">
         <label for="name">Name</label>
         <input
@@ -36,7 +36,7 @@
         />
       </div>
       <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate" />
-      <!-- <label for="checkbox">{{ checked }}</label> -->
+      <label for="checkbox">{{ checked }}</label>
       <div class="form-group">
         <label for="private">IsPrivate</label>
         <input
@@ -48,7 +48,7 @@
         />
       </div>
       <button type="submit" class="btn btn-primary">Add Keep</button>
-    </form>
+    </form> -->
 
     <div class="row">
       <div>
@@ -71,7 +71,7 @@
         <button type="button" class="btn btn-primary">Share</button>
         <button type="button" class="btn btn-primary">Keep</button>
       </div>
-    </div>-->
+    </div> -->
     <!-- <KeepAdd></KeepAdd> -->
   </div>
 </template>
