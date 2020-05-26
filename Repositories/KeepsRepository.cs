@@ -58,6 +58,16 @@ namespace Keepr.Repositories
       int affectedRows = _db.Execute(sql, new {KeepData.Id});
       return affectedRows == 1;
     }
+    internal bool AddShare(Keep KeepData)
+    {
+      string sql = @"
+        UPDATE keeps
+        SET
+          shares = shares + 1
+        WHERE id = @Id LIMIT 1";
+      int affectedRows = _db.Execute(sql, new {KeepData.Id});
+      return affectedRows == 1;
+    }
     internal bool AddKeep(Keep KeepData)
     {
       string sql = @"

@@ -73,6 +73,14 @@ namespace Keepr.Services
             return foundKeep;
           }
         }
+        if (keepToUpdate.Shares == 1)
+        {
+          if (_repo.AddShare(keepToUpdate))
+          {
+            foundKeep.Shares++;
+            return foundKeep;
+          }
+        }
       //}
       //   if (_repo.Edit(keepToUpdate, userId))
       //   {

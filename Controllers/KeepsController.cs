@@ -97,7 +97,8 @@ namespace Keepr.Controllers
         if (user == null)
         {
           //throw new Exception("must be logged in");
-          return Ok(_ks.Edit(keepToUpdate, ""));
+          //return Ok(_ks.Edit(keepToUpdate, ""));
+          //userId ="";
         }
         else 
         {
