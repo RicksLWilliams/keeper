@@ -16,10 +16,16 @@ namespace Keepr.Controllers
   public class VaultsController : ControllerBase
   {
     private readonly VaultsService _vs;
+    // private readonly KeepsService _ks;
     public VaultsController(VaultsService vs)
     {
       _vs = vs;
     }
+    // public VaultsController(KeepsService ks)
+    // {
+    //   _ks = ks;
+    // }
+
     [Authorize]
     [HttpGet]
     public ActionResult<IEnumerable<Vault>> Get()
@@ -49,6 +55,20 @@ namespace Keepr.Controllers
       try
       {
         return Ok(_vs.GetOne(id));
+      }
+      catch (System.Exception err)
+      {
+        return BadRequest(err.Message);
+      }
+    }
+        //Do I need this?  should I lock this down?
+    [Authorize]
+    [HttpGet("{id}/keeps")]
+    public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int id)
+    {
+      try
+      {
+        return Ok(_vs.GetKeepsByVaultId(id));
       }
       catch (System.Exception err)
       {
@@ -91,33 +111,6 @@ namespace Keepr.Controllers
         return BadRequest(error.Message);
       }
     }
-
-    // [Authorize]
-    // [HttpPut("{id}")]
-    // //I don't think this is required
-    // public ActionResult<Vault> Edit(int id, [FromBody] Vault vaultToUpdate)
-    // {
-    //   try
-    //   {
-    //     string userId = "";
-    //     vaultToUpdate.Id = id;
-    //     Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
-    //     if (user == null)
-    //     {
-    //       throw new Exception("must be logged in");
-    //       //return Ok(_ks.Edit(keepToUpdate, ""));
-    //     }
-    //     else
-    //     {
-    //       userId = user.Value;
-    //       return Ok(_vs.Edit(vaultToUpdate, userId));
-    //     }
-    //   }
-    //   catch (System.Exception err)
-    //   {
-    //     return BadRequest(err.Message);
-    //   }
-    // }
 
   }
 }

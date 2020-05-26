@@ -18,10 +18,10 @@ namespace Keepr.Services
       return _repo.Get(userId);
     }
 
-    // internal IEnumerable<Vault> GetMy(string userId)
-    // {
-    //   return _repo.GetMy(userId);
-    // }
+    public IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int id)
+    {
+      return _repo.GetKeepsByVaultId(id);
+    }
 
     public Vault GetOne(int id)
     {
