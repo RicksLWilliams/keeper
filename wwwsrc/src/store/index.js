@@ -59,19 +59,10 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-    async viewKeep({ commit, dispatch }, id) {
+    async editKeep({ commit, dispatch }, keepData) {
       try {
-        let newKeep = { id: id , views: 1};
-        let res = await api.put("keeps/" + id, newKeep)
-        dispatch("getKeeps")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-    async keepKeep({ commit, dispatch }, id) {
-      try {
-        let newKeep = { id: id , keeps: 1};
-        let res = await api.put("keeps/" + id, newKeep)
+        //let newKeep = { id: id , keeps: 1};
+        let res = await api.put("keeps/" + keepData.id, keepData)
         dispatch("getKeeps")
       } catch (err) {
         alert(JSON.stringify(err));

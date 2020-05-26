@@ -10,12 +10,12 @@
       <h1>{{keepData.name}}</h1>
       <h2>{{keepData.description}}</h2>
       <img :src="keepData.img" class="img-fluid" alt srcset />
-      <h2>{{keepData.views}}</h2>
-      <h2>{{keepData.shares}}</h2>
-      <h2>{{keepData.keeps}}</h2>
-      <button type="button" class="btn btn-primary" @click="viewKeep()">View</button>
-      <button type="button" class="btn btn-primary">Share</button>
-      <button type="button" class="btn btn-primary" @click="keepKeep()">Keep</button>
+      <h2>Views: {{keepData.views}}</h2>
+      <h2>Shares: {{keepData.shares}}</h2>
+      <h2>Keeps: {{keepData.keeps}}</h2>
+      <button type="button" class="btn btn-primary" @click="editKeep('views')">View</button>
+      <button type="button" class="btn btn-primary" @click="editKeep('shares')">Share</button>
+      <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep</button>
     </div>
     <!-- </div> -->
   </div>
@@ -33,13 +33,12 @@ export default {
       //console.log("deleteKeep" , this.$auth.userInfo.sub)
       this.$store.dispatch("deleteKeep", this.keepData.id);
     },
-    viewKeep() {
-      //console.log("deleteKeep" , this.$auth.userInfo.sub)
-      this.$store.dispatch("viewKeep", this.keepData.id);
-    },
-    keepKeep() {
-      //console.log("deleteKeep" , this.$auth.userInfo.sub)
-      this.$store.dispatch("keepKeep", this.keepData.id);
+    editKeep(data){
+      let keepData = {}
+      keepData["id"] = this.keepData.id
+      keepData[data] = 1
+      //console.log('editKeep', keepData)
+      this.$store.dispatch("editKeep", keepData);
     }
   },
   computed: {
