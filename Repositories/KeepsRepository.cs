@@ -21,18 +21,6 @@ namespace Keepr.Repositories
       return _db.Query<Keep>(sql);
     }
 
-    
-    // internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(Keep KeepData)
-    // {
-    //   string sql = @"SELECT 
-    //     k.*,
-    //     vk.id as vaultKeepId
-    //     FROM vaultkeeps vk
-    //     INNER JOIN keeps k ON k.id = vk.keepId 
-    //     WHERE (vaultId = @vaultId AND vk.userId = @userId) ;";
-    //     return _db.Query<VaultKeepViewModel>(sql, KeepData );
-    // }
-
     internal IEnumerable<Keep> GetMy(string userId)
     {
       string sql = "SELECT * FROM keeps WHERE userid = @userId";

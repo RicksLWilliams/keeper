@@ -9,12 +9,19 @@
     </div>
 
     <KeepAdd></KeepAdd>
+
+    <div class="row">
+      <div>
+        <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Vault from "../components/Vault";
 import VaultAdd from "../components/VaultAdd";
+import Keep from "../components/Keep";
 import KeepAdd from "../components/KeepAdd";
 export default {
   mounted() {
@@ -26,9 +33,12 @@ export default {
     },
     vaults() {
       return this.$store.state.vaults;
+    },
+    keeps() {
+      return this.$store.state.publicKeeps;
     }
   },
-  components: { Vault, VaultAdd, KeepAdd }
+  components: { Vault, VaultAdd, Keep, KeepAdd }
 };
 </script>
 
