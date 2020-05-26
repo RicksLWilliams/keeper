@@ -10,12 +10,12 @@
         <h1>{{keepData.name}}</h1>
         <h2>{{keepData.description}}</h2>
         <img :src="keepData.img" class="img-fluid" alt srcset />
-        <h2>Views: {{keepData.views}}</h2>
+        <!-- <h2>Views: {{keepData.views}}</h2>
         <h2>Shares: {{keepData.shares}}</h2>
-        <h2>Keeps: {{keepData.keeps}}</h2>
-        <button type="button" class="btn btn-primary" @click="editKeep('views')">View</button>
-        <button type="button" class="btn btn-primary" @click="editKeep('shares')">Share</button>
-        <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep</button>
+        <h2>Keeps: {{keepData.keeps}}</h2> -->
+        <button type="button" class="btn btn-primary" @click="editKeep('views')">View({{keepData.views}})</button>
+        <button type="button" class="btn btn-primary" @click="editKeep('shares')">Share({{keepData.shares}})</button>
+        <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep({{keepData.keeps}})</button>
 
         <select class="select" v-model="selected" @change="vaultKeep()">
           <option disabled value>
@@ -27,6 +27,10 @@
             :value="listInfo.id"
           >{{listInfo.name}}</option>
         </select>
+        <div v-if="this.keepData.vaultKeepId">
+          <!-- <h5>vaultKeepID: {{keepData.vaultKeepId}}</h5> -->
+          <button type="button" class="btn btn-danger" @click="deleteVaultKeep()">Remove({{keepData.vaultKeepId}})</button>
+        </div>
       </div>
     </div>
   </div>
@@ -37,12 +41,16 @@ export default {
   name: "Keep",
   props: ["keepData"],
   data() {
-     return { selected: "" };
+    return { selected: "" };
   },
   methods: {
     deleteKeep() {
       //console.log("deleteKeep" , this.$auth.userInfo.sub)
       this.$store.dispatch("deleteKeep", this.keepData.id);
+    },
+    deleteVaultKeep() {
+      //console.log("deleteKeep" , this.$auth.userInfo.sub)
+      this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);
     },
     editKeep(data) {
       let keepData = {};
@@ -51,14 +59,14 @@ export default {
       //console.log('editKeep', keepData)
       this.$store.dispatch("editKeep", keepData);
     },
-    vaultKeep(){
-      console.log("vaultKeep-vault", this.selected)
-      console.log("vaultKeep-keep", this.keepData.id)
+    vaultKeep() {
+      //console.log("vaultKeep-vault", this.selected)
+      console.log("vaultKeep-keep", this.keepData);
       let newVaultKeep = {};
-      newVaultKeep.vaultId = this.selected
-      newVaultKeep.keepId = this.keepData.id
+      newVaultKeep.vaultId = this.selected;
+      newVaultKeep.keepId = this.keepData.id;
       this.$store.dispatch("addVaultKeep", newVaultKeep);
-      this.editKeep("keeps")
+      this.editKeep("keeps");
     }
   },
   computed: {
@@ -72,7 +80,7 @@ export default {
     listItems() {
       //console.log("listItems",this.$store.state.lists )
       return this.$store.state.vaults;
-    },
+    }
   }
 };
 </script>

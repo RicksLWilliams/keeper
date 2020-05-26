@@ -4,7 +4,7 @@
 
     <div class="row">
       <div>
-        <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
+        <keep v-for="keep in keeps" :keepData="keep" :key="keep.vaultKeepid"></keep>
       </div>
     </div>
 
@@ -21,12 +21,8 @@ export default {
     };
   },
   mounted() {
-    console.log ( "mounted vaultDetails", this.$route.params.vaultId)
+    //console.log ( "mounted vaultDetails", this.$route.params.vaultId)
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
-    this.$store.dispatch("getKeeps");
-    if (this.$auth.userInfo.sub) {
-      this.$store.dispatch("getVaults");
-    }
   },
   computed: {
     user() {
