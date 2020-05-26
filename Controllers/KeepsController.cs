@@ -47,6 +47,27 @@ namespace Keepr.Controllers
       }
     }
 
+    [HttpGet("mykeeps")]
+    [Authorize]
+    public ActionResult<Keep> GetMy()
+    {
+            try
+      {
+        Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
+        if (user == null)
+        {
+          throw new Exception("your are not logged in");
+        }
+        string userId = user.Value;
+        //return Ok(_ks.Delete(id, userId));
+        return Ok(_ks.GetMy(userId));
+      }
+      catch (System.Exception error)
+      {
+        return BadRequest(error.Message);
+      }
+    }
+
     [HttpPost]
     [Authorize]
     public ActionResult<Keep> Post([FromBody] Keep newKeep)
@@ -91,7 +112,7 @@ namespace Keepr.Controllers
     {
       try
       {
-        string userId ="";  
+        string userId = "";
         keepToUpdate.Id = id;
         Claim user = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier);
         if (user == null)
@@ -100,9 +121,9 @@ namespace Keepr.Controllers
           //return Ok(_ks.Edit(keepToUpdate, ""));
           //userId ="";
         }
-        else 
+        else
         {
-            userId = user.Value;
+          userId = user.Value;
         }
         return Ok(_ks.Edit(keepToUpdate, userId));
       }

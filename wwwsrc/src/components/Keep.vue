@@ -2,7 +2,7 @@
   <!-- <div> -->
     <div class="col-3 m-3 border rounded">
       <div>
-        <div v-if="this.userId == this.keepData.userId">
+        <div v-if="this.userId == this.keepData.userId && this.keepData.isPrivate">
           <button type="button" class="close text-danger" @click="deleteKeep()">
             <span>&times;</span>
           </button>
@@ -15,11 +15,11 @@
         <h2>Keeps: {{keepData.keeps}}</h2> -->
         <button type="button" class="btn btn-primary" @click="editKeep('views')">View({{keepData.views}})</button>
         <button type="button" class="btn btn-primary" @click="editKeep('shares')">Share({{keepData.shares}})</button>
-        <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep({{keepData.keeps}})</button>
+        <!-- <button type="button" class="btn btn-primary" @click="editKeep('keeps')">Keep({{keepData.keeps}})</button> -->
 
         <select class="select" v-model="selected" @change="vaultKeep()">
           <option disabled value>
-            <h3 class="edit">Keep</h3>
+            <h3 class="edit">Keep({{keepData.keeps}}</h3>
           </option>
           <option
             v-for="listInfo in listItems"
@@ -27,10 +27,9 @@
             :value="listInfo.id"
           >{{listInfo.name}}</option>
         </select>
-        <div v-if="this.keepData.vaultKeepId">
+
           <!-- <h5>vaultKeepID: {{keepData.vaultKeepId}}</h5> -->
-          <button type="button" class="btn btn-danger" @click="deleteVaultKeep()">Remove({{keepData.vaultKeepId}})</button>
-        </div>
+          <button v-if="this.keepData.vaultKeepId" type="button" class="btn btn-secondary" @click="deleteVaultKeep()">Remove({{keepData.vaultKeepId}})</button>
       </div>
     </div>
   <!-- </div> -->
