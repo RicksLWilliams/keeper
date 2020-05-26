@@ -117,7 +117,7 @@ export default new Vuex.Store({
     async deleteVaultKeep({ commit, dispatch }, id) {
       try {
         let res = await api.delete("vaultKeeps/" + id);
-        this.dispatch("getVaultKeeps")
+        this.dispatch("getVaultKeeps", router.currentRoute.params.vaultId)
       } catch (err) {
         alert(JSON.stringify(err));
       }
