@@ -50,28 +50,10 @@
       <button type="submit" class="btn btn-primary">Add Keep</button>
     </form>-->
 
-    <div class="row">
-      <div>
-        <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
-      </div>
+    <div class="row justify-content-center">
+      <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
     </div>
 
-    <!-- <div class="row justify-content-center">
-      <div class="col-3 m-3 border rounded" v-for="keep in keeps" :key="keep.id">
-        <button type="button" class="close text-danger" @click="deleteKeep()">
-          <span>&times;</span>
-        </button>
-        <h1>{{keep.name}}</h1>
-        <h2>{{keep.description}}</h2>
-        <img :src="keep.img" class="img-fluid" alt srcset />
-        <h2>{{keep.views}}</h2>
-        <h2>{{keep.shares}}</h2>
-        <h2>{{keep.keeps}}</h2>
-        <button type="button" class="btn btn-primary">View</button>
-        <button type="button" class="btn btn-primary">Share</button>
-        <button type="button" class="btn btn-primary">Keep</button>
-      </div>
-    </div>-->
     <!-- <KeepAdd></KeepAdd> -->
   </div>
 </template>

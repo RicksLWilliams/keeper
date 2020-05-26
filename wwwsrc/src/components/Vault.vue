@@ -1,16 +1,21 @@
 <template>
   <div>
     <!-- <div class="row justify-content-center"> -->
-    <div class="row">
-      <div class="col-10 m-3 border rounded" @click="$router.push({name: 'vault', params: {vaultId: vaultData.id}})">
+    <div class="row  m-3 border rounded" @click="$router.push({name: 'vault', params: {vaultId: vaultData.id}})">
+      <div class="col-5 m-1">
+        <h1>Name: {{vaultData.name}}</h1>
+      </div>
+      <div class="col-5 m-1">
+        <h2>Description: {{vaultData.description}}</h2>
+      </div>
+      <div class="col-1 m-1">
         <div>
           <button type="button" class="close text-danger" @click="deleteVault()">
             <span>&times;</span>
           </button>
-        </div >
-        <h1>Name: {{vaultData.name}}</h1>
-        <h2>Description: {{vaultData.description}}</h2>
+        </div>
       </div>
+      <!-- </div> -->
       <!-- </div> -->
     </div>
   </div>

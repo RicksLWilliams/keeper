@@ -10,10 +10,8 @@
 
     <KeepAdd></KeepAdd>
 
-    <div class="row">
-      <div>
-        <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
-      </div>
+    <div class="row justify-content-center">
+      <keep v-for="keep in keeps" :keepData="keep" :key="keep.id"></keep>
     </div>
   </div>
 </template>

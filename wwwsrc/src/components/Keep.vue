@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div> -->
     <div class="col-3 m-3 border rounded">
       <div>
         <div v-if="this.userId == this.keepData.userId">
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

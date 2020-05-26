@@ -122,7 +122,5 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-
-
   }
 });

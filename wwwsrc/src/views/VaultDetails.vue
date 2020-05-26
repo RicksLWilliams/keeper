@@ -2,12 +2,9 @@
   <div class="home container-fluid">
     <h1>Vault Details</h1>
 
-    <div class="row">
-      <div>
-        <keep v-for="keep in keeps" :keepData="keep" :key="keep.vaultKeepid"></keep>
-      </div>
+    <div class="row justify-content-center">
+      <keep v-for="keep in keeps" :keepData="keep" :key="keep.vaultKeepid"></keep>
     </div>
-
   </div>
 </template>
 
