@@ -34,9 +34,20 @@
           v-model="newKeep.img"
         />
       </div>
-      <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate" />
-      <!-- <label for="checkbox">{{ checked }}</label> -->
+
       <div class="form-group">
+        <label for="isPrivate">isPrivate</label>
+        <input
+          type="checkbox"
+          name="isPrivate"
+          class="form-control"
+          v-model="newKeep.isPrivate"
+        />
+      </div>
+
+      <!-- <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate" /> -->
+      <!-- <label for="checkbox">{{ checked }}</label> -->
+      <!-- <div class="form-group">
         <label for="private">IsPrivate</label>
         <input
           type="number"
@@ -45,7 +56,7 @@
           placeholder="Enter private...."
           v-model="newKeep.isPrivate"
         />
-      </div>
+      </div>-->
       <button type="submit" class="btn btn-primary">Add Keep</button>
     </form>
   </div>
@@ -72,7 +83,7 @@ export default {
   },
   methods: {
     addKeep() {
-      this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
+      //this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
       this.$store.dispatch("addKeep", this.newKeep);
       this.newKeep = {};
     }

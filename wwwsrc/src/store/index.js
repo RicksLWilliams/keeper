@@ -47,6 +47,7 @@ export default new Vuex.Store({
       try {
         let res = await api.post("keeps", newKeep)
         dispatch("getKeeps")
+        dispatch("getMyKeeps")
       } catch (err) {
         alert(JSON.stringify(err));
       }
@@ -59,7 +60,6 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-    //getMyVaults
     async getMyKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps/mykeeps")
@@ -73,6 +73,7 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("keeps/" + id);
         this.dispatch("getKeeps")
+        this.dispatch("getMyKeeps")
       } catch (err) {
         alert(JSON.stringify(err));
       }
