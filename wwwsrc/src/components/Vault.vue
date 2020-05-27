@@ -1,8 +1,8 @@
 <template>
   <div>
     <!-- <div class="row justify-content-center"> -->
-    <div class="row  m-3 border rounded" @click="$router.push({name: 'vault', params: {vaultId: vaultData.id}})">
-      <div class="col-5 m-1">
+    <div class="row  m-3 border rounded">
+      <div class="col-5 m-1" @click="$router.push({name: 'vault', params: {vaultId: vaultData.id}})">
         <h1>Name: {{vaultData.name}}</h1>
       </div>
       <div class="col-5 m-1">
