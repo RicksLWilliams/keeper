@@ -31,6 +31,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
+    this.$store.dispatch("getVaults");
   },
   computed: {
     user() {
@@ -57,7 +58,7 @@ export default {
       this.newKeep = {};
     },
     changeVault() {
-      //$router.push({name: 'vault', params: {vaultId: this.selected}})
+      this.$router.push({name: 'vault', params: {vaultId: this.selected}})
       this.$store.dispatch("getVaultKeeps", this.selected);
     }
   },
