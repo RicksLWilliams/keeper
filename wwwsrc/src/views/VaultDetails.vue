@@ -2,6 +2,17 @@
   <div class="home container-fluid">
     <h1>Vault Details</h1>
 
+    <select class="select" v-model="selected" @change="changeVault()">
+      <option disabled value>
+        <h3 class="edit">Keep</h3>
+      </option>
+      <option
+        v-for="listInfo in listItems"
+        :key="listInfo.id"
+        :value="listInfo.id"
+      >{{listInfo.name}}</option>
+    </select>
+
     <div class="row justify-content-center">
       <keep v-for="keep in keeps" :keepData="keep" :key="keep.vaultKeepid"></keep>
     </div>
@@ -14,11 +25,11 @@ export default {
   name: "home",
   data() {
     return {
-      newKeep: {}
+      newKeep: {},
+      selected: ""
     };
   },
   mounted() {
-    //console.log ( "mounted vaultDetails", this.$route.params.vaultId)
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
   },
   computed: {
@@ -27,6 +38,9 @@ export default {
     },
     keeps() {
       return this.$store.state.vaultKeeps;
+    },
+    listItems() {
+      return this.$store.state.vaults;
     }
   },
   methods: {
@@ -34,16 +48,17 @@ export default {
       this.$store.dispatch("logout");
     },
     deleteKeep(id) {
-      console.log("deleteKeep", id);
+      //console.log("deleteKeep", id);
       this.$store.dispatch("deleteKeep", id);
     },
     addKeep() {
-      //console.log("addKeep", this.newKeep);
-      //this.newOrg.name = this.orgApiData.name;
-      //this.newOrg.address = this.orgApiData.address;
       this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
       this.$store.dispatch("addKeep", this.newKeep);
       this.newKeep = {};
+    },
+    changeVault() {
+      //$router.push({name: 'vault', params: {vaultId: this.selected}})
+      this.$store.dispatch("getVaultKeeps", this.selected);
     }
   },
   components: { Keep }

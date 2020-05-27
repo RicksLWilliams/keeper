@@ -29,7 +29,7 @@
 
       <select v-if="this.userId" class="select" v-model="selected" @change="vaultKeep()">
         <option disabled value>
-          <h3 class="edit">Keep({{keepData.keeps}}</h3>
+          <h3 class="edit">Keep({{keepData.keeps}})</h3>
         </option>
         <option
           v-for="listInfo in listItems"
