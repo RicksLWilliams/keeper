@@ -17,24 +17,28 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    publicKeeps: [],
+    keeps:[],
     vaults:[],
-    vaultKeeps:[],
-    myKeeps:[],
+    //publicKeeps: [],
+    //vaultKeeps:[],
+    //myKeeps:[],
   },
   mutations: {
     setKeeps(state, keeps) {
-      state.publicKeeps = keeps
-    },
-    setMyKeeps(state, mykeeps) {
-      state.myKeeps = mykeeps
+      state.keeps = keeps
     },
     setVaults(state, vaults) {
       state.vaults = vaults
     },
-    setVaultKeeps(state, vaultKeeps) {
-      state.vaultKeeps = vaultKeeps
-    },
+    // setMyKeeps(state, mykeeps) {
+    //   state.myKeeps = mykeeps
+    // },
+    // setVaultKeeps(state, vaultKeeps) {
+    //   state.vaultKeeps = vaultKeeps
+    // },
+    setAll(state, object){
+      state[object.name] = object.payload
+    }
   },
   actions: {
     setBearer({ }, bearer) {
@@ -63,7 +67,7 @@ export default new Vuex.Store({
     async getMyKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps/mykeeps")
-        commit("setMyKeeps", res.data)
+        commit("setKeeps", res.data)
       } catch (err) {
         alert(JSON.stringify(err));
       }
@@ -123,7 +127,7 @@ export default new Vuex.Store({
     async getVaultKeeps({ commit, dispatch }, id) {
       try {
         let res = await api.get("vaults/" + id +"/keeps")
-        commit("setVaultKeeps", res.data)
+        commit("setKeeps", res.data)
       } catch (err) {
         alert(JSON.stringify(err));
       }

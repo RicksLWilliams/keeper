@@ -34,7 +34,7 @@ export default {
       return this.$store.state.user;
     },
     keeps() {
-      return this.$store.state.publicKeeps;
+      return this.$store.state.keeps;
     }
   },
   methods: {

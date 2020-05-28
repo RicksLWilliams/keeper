@@ -75,7 +75,7 @@ export default {
     },
     vaultKeep() {
       //console.log("vaultKeep-vault", this.selected)
-      console.log("vaultKeep-keep", this.keepData);
+      //console.log("vaultKeep-keep", this.keepData);
       let newVaultKeep = {};
       newVaultKeep.vaultId = this.selected;
       newVaultKeep.keepId = this.keepData.id;

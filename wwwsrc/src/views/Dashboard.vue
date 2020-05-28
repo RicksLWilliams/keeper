@@ -34,7 +34,7 @@ export default {
       return this.$store.state.vaults;
     },
     keeps() {
-      return this.$store.state.myKeeps;
+      return this.$store.state.keeps;
     }
   },
   components: { Vault, VaultAdd, Keep, KeepAdd }

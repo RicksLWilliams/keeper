@@ -30,6 +30,7 @@ export default {
     };
   },
   mounted() {
+    //debugger
     this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
     this.$store.dispatch("getVaults");
   },
@@ -38,16 +39,16 @@ export default {
       return this.$store.state.user;
     },
     keeps() {
-      return this.$store.state.vaultKeeps;
+      return this.$store.state.keeps;
     },
     listItems() {
       return this.$store.state.vaults;
     }
   },
   methods: {
-    logout() {
-      this.$store.dispatch("logout");
-    },
+    // logout() {
+    //   this.$store.dispatch("logout");
+    // },
     deleteKeep(id) {
       //console.log("deleteKeep", id);
       this.$store.dispatch("deleteKeep", id);
@@ -58,8 +59,8 @@ export default {
       this.newKeep = {};
     },
     changeVault() {
-      this.$router.push({name: 'vault', params: {vaultId: this.selected}})
       this.$store.dispatch("getVaultKeeps", this.selected);
+      this.$router.push({name: 'vault', params: {vaultId: this.selected}})
     }
   },
   components: { Keep }
