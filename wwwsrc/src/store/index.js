@@ -17,11 +17,8 @@ let api = Axios.create({
 
 export default new Vuex.Store({
   state: {
-    keeps:[],
-    vaults:[],
-    //publicKeeps: [],
-    //vaultKeeps:[],
-    //myKeeps:[],
+    keeps: [],
+    vaults: [],
   },
   mutations: {
     setKeeps(state, keeps) {
@@ -30,13 +27,7 @@ export default new Vuex.Store({
     setVaults(state, vaults) {
       state.vaults = vaults
     },
-    // setMyKeeps(state, mykeeps) {
-    //   state.myKeeps = mykeeps
-    // },
-    // setVaultKeeps(state, vaultKeeps) {
-    //   state.vaultKeeps = vaultKeeps
-    // },
-    setAll(state, object){
+    setAll(state, object) {
       state[object.name] = object.payload
     }
   },
@@ -47,51 +38,45 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-    async addKeep({ commit, dispatch }, newKeep) {
+    // async addKeep({ commit, dispatch }, newKeep) {
+    //   try {
+    //     let res = await api.post("keeps", newKeep)
+    //     //dispatch("getMyKeeps")
+    //     dispatch("getAllKeeps", "keeps/mykeeps")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+    async getAllKeeps({ commit, dispatch }, path) {
+      //getKeeps      api.get("keeps")
+      //getMyKeeps    api.get("keeps/mykeeps")
+      //getVaultKeeps api.get("vaults/" + id +"/keeps")
       try {
-        let res = await api.post("keeps", newKeep)
-        dispatch("getKeeps")
-        dispatch("getMyKeeps")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-    async getKeeps({ commit, dispatch }) {
-      try {
-        let res = await api.get("keeps")
+        let res = await api.get(path)
         commit("setKeeps", res.data)
       } catch (err) {
         alert(JSON.stringify(err));
       }
     },
-    async getMyKeeps({ commit, dispatch }) {
-      try {
-        let res = await api.get("keeps/mykeeps")
-        commit("setKeeps", res.data)
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-    
-    async deleteKeep({ commit, dispatch }, id) {
-      try {
-        let res = await api.delete("keeps/" + id);
-        this.dispatch("getKeeps")
-        this.dispatch("getMyKeeps")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
+    // async deleteKeep({ commit, dispatch }, id) {
+    //   try {
+    //     let res = await api.delete("keeps/" + id);
+    //     //this.dispatch("getMyKeeps")
+    //     dispatch("getAllKeeps", "keeps/mykeeps")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
     async editKeep({ commit, dispatch }, keepData) {
       try {
-        //let newKeep = { id: id , keeps: 1};
         let res = await api.put("keeps/" + keepData.id, keepData)
-        dispatch("getKeeps")
+        //dispatch("getKeeps")
+        dispatch("getAllKeeps", "keeps")
       } catch (err) {
         alert(JSON.stringify(err));
       }
     },
-    async getVaults({ commit, dispatch }) {
+    async getVaults({ commit, dispatch }, input) {
       try {
         let res = await api.get("vaults")
         commit("setVaults", res.data)
@@ -99,14 +84,67 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-    async deleteVault({ commit, dispatch }, id) {
+
+    // async deleteKeep({ commit, dispatch }, id) {
+    //   try {
+    //     let res = await api.delete("keeps/" + id);
+    //     //this.dispatch("getMyKeeps")
+    //     dispatch("getAllKeeps", "keeps/mykeeps")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+
+    // async deleteVault({ commit, dispatch }, id) {
+    //   try {
+    //     let res = await api.delete("vaults/" + id);
+    //     this.dispatch("getVaults", "")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+
+    // async deleteVaultKeep({ commit, dispatch }, id) {
+    //   try {
+    //     let res = await api.delete("vaultKeeps/" + id);
+    //     //this.dispatch("getVaultKeeps", router.currentRoute.params.vaultId)
+    //     let path = "vaults/" + router.currentRoute.params.vaultId + "/keeps"
+    //     this.dispatch("getAllKeeps", path)
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+
+    async deleteAny({ commit, dispatch }, data) {
+      //                data.route            data.dispatch  data.path
+      //deleteKeep      "keeps/" + id         "getAllKeeps", "keeps/mykeeps"
+      //deleteVault     "vaults/" + id,       "getVaults",   ""
+      //deleteVaultKeep "vaultKeeps/" + id,   "getAllKeeps", "vaults/" + router.currentRoute.params.vaultId + "/keeps"
       try {
-        let res = await api.delete("vaults/" + id);
-        this.dispatch("getVaults")
+        //debugger
+        let res = await api.delete(data.route);
+        this.dispatch(data.dispatch, data.path)
       } catch (err) {
         alert(JSON.stringify(err));
       }
     },
+
+
+
+
+
+
+
+    async addKeep({ commit, dispatch }, newKeep) {
+      try {
+        let res = await api.post("keeps", newKeep)
+        //dispatch("getMyKeeps")
+        dispatch("getAllKeeps", "keeps/mykeeps")
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+
     async addVault({ commit, dispatch }, newVault) {
       try {
         let res = await api.post("vaults", newVault)
@@ -115,28 +153,10 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
+
     async addVaultKeep({ commit, dispatch }, newVaultKeep) {
       try {
         let res = await api.post("vaultKeeps", newVaultKeep)
-        //do I need to do this now?
-        //dispatch("getVaultKeeps")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-    async getVaultKeeps({ commit, dispatch }, id) {
-      try {
-        let res = await api.get("vaults/" + id +"/keeps")
-        commit("setKeeps", res.data)
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-    //deleteVaultKeep
-    async deleteVaultKeep({ commit, dispatch }, id) {
-      try {
-        let res = await api.delete("vaultKeeps/" + id);
-        this.dispatch("getVaultKeeps", router.currentRoute.params.vaultId)
       } catch (err) {
         alert(JSON.stringify(err));
       }

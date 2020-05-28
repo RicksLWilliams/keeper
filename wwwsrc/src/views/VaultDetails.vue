@@ -31,7 +31,8 @@ export default {
   },
   mounted() {
     //debugger
-    this.$store.dispatch("getVaultKeeps", this.$route.params.vaultId);
+    let path = "vaults/" + this.$route.params.vaultId +"/keeps"
+    this.$store.dispatch("getAllKeeps", path);
     this.$store.dispatch("getVaults");
   },
   computed: {
@@ -59,8 +60,14 @@ export default {
       this.newKeep = {};
     },
     changeVault() {
-      this.$store.dispatch("getVaultKeeps", this.selected);
-      this.$router.push({name: 'vault', params: {vaultId: this.selected}})
+      if (this.$route.params.vaultId != this.selected) {
+        let path = "vaults/" + this.selected +"/keeps"
+        this.$store.dispatch("getAllKeeps", path);
+        this.$router.push({
+          name: "vault",
+          params: { vaultId: this.selected }
+        });
+      }
     }
   },
   components: { Keep }

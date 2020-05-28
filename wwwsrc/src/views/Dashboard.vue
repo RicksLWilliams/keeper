@@ -24,7 +24,7 @@ import KeepAdd from "../components/KeepAdd";
 export default {
   mounted() {
     this.$store.dispatch("getVaults");
-    this.$store.dispatch("getMyKeeps");
+    this.$store.dispatch("getAllKeeps" ,"keeps/mykeeps");
   },
   computed: {
     user() {

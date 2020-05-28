@@ -60,11 +60,27 @@ export default {
   methods: {
     deleteKeep() {
       //console.log("deleteKeep" , this.$auth.userInfo.sub)
-      this.$store.dispatch("deleteKeep", this.keepData.id);
+      //this.$store.dispatch("deleteKeep", this.keepData.id);
+      //                data.route            data.dispatch  data.path
+      //deleteKeep      "keeps/" + id         "getAllKeeps", "keeps/mykeeps"
+      let data = {}
+      data.route = "keeps/" + this.keepData.id
+      data.dispatch = "getAllKeeps"
+      data.path = "keeps/mykeeps"
+      //console.log("deleteKeep", data)
+      this.$store.dispatch("deleteAny", data);
     },
     deleteVaultKeep() {
       //console.log("deleteKeep" , this.$auth.userInfo.sub)
-      this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);
+      //this.$store.dispatch("deleteVaultKeep", this.keepData.vaultKeepId);
+      //data.route      data.dispatch         data.path
+      //deleteVaultKeep "vaultKeeps/" + id,   "getAllKeeps", "vaults/" + router.currentRoute.params.vaultId + "/keeps"
+      let data = {}
+      data.route = "vaultKeeps/" + this.keepData.vaultKeepId
+      data.dispatch = "getAllKeeps"
+      data.path = "vaults/" + this.$router.currentRoute.params.vaultId + "/keeps"
+      //console.log("deleteVaultKeep", data)
+      this.$store.dispatch("deleteAny", data);
     },
     editKeep(data) {
       let keepData = {};

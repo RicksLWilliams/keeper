@@ -24,7 +24,7 @@ export default {
   },
   mounted() {
     //console.log(this.$auth.userInfo.sub)
-    this.$store.dispatch("getKeeps");
+    this.$store.dispatch("getAllKeeps", "keeps");
     if (this.$auth.userInfo.sub) {
       this.$store.dispatch("getVaults");
     }
