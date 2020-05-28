@@ -96,7 +96,7 @@ export default {
       newVaultKeep.vaultId = this.selected;
       newVaultKeep.keepId = this.keepData.id;
       this.$store.dispatch("addVaultKeep", newVaultKeep);
-      this.editKeep("keeps");
+      //this.editKeep("keeps");
     }
   },
   computed: {

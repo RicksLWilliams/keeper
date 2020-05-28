@@ -34,12 +34,14 @@ namespace Keepr.Repositories
     {
       //throw new NotImplementedException();
       string sql = @"
+        UPDATE keeps set keeps = keeps + 1 where id = @KeepId LIMIT 1;
         INSERT INTO vaultKeeps
         (userId, vaultId, keepId)
         VALUES
         (@UserId, @VaultId, @KeepId);
         SELECT LAST_INSERT_ID()";
-      vaultKeepData.Id = _db.ExecuteScalar<int>(sql, vaultKeepData);
+    //vaultKeepData.Id = _db.ExecuteScalar<int>(sql, vaultKeepData);
+      vaultKeepData.Id = _db.Execute(sql, vaultKeepData);
       return vaultKeepData;
     }
     internal bool Delete(int id, string userId)

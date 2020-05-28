@@ -38,15 +38,7 @@ export default new Vuex.Store({
     resetBearer() {
       api.defaults.headers.authorization = "";
     },
-    // async addKeep({ commit, dispatch }, newKeep) {
-    //   try {
-    //     let res = await api.post("keeps", newKeep)
-    //     //dispatch("getMyKeeps")
-    //     dispatch("getAllKeeps", "keeps/mykeeps")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
+
     async getAllKeeps({ commit, dispatch }, path) {
       //getKeeps      api.get("keeps")
       //getMyKeeps    api.get("keeps/mykeeps")
@@ -58,15 +50,7 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-    // async deleteKeep({ commit, dispatch }, id) {
-    //   try {
-    //     let res = await api.delete("keeps/" + id);
-    //     //this.dispatch("getMyKeeps")
-    //     dispatch("getAllKeeps", "keeps/mykeeps")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
+
     async editKeep({ commit, dispatch }, keepData) {
       try {
         let res = await api.put("keeps/" + keepData.id, keepData)
@@ -76,6 +60,7 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
+    
     async getVaults({ commit, dispatch }, input) {
       try {
         let res = await api.get("vaults")
@@ -84,36 +69,6 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-
-    // async deleteKeep({ commit, dispatch }, id) {
-    //   try {
-    //     let res = await api.delete("keeps/" + id);
-    //     //this.dispatch("getMyKeeps")
-    //     dispatch("getAllKeeps", "keeps/mykeeps")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
-
-    // async deleteVault({ commit, dispatch }, id) {
-    //   try {
-    //     let res = await api.delete("vaults/" + id);
-    //     this.dispatch("getVaults", "")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
-
-    // async deleteVaultKeep({ commit, dispatch }, id) {
-    //   try {
-    //     let res = await api.delete("vaultKeeps/" + id);
-    //     //this.dispatch("getVaultKeeps", router.currentRoute.params.vaultId)
-    //     let path = "vaults/" + router.currentRoute.params.vaultId + "/keeps"
-    //     this.dispatch("getAllKeeps", path)
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
 
     async deleteAny({ commit, dispatch }, data) {
       //                data.route            data.dispatch  data.path
@@ -129,16 +84,9 @@ export default new Vuex.Store({
       }
     },
 
-
-
-
-
-
-
     async addKeep({ commit, dispatch }, newKeep) {
       try {
         let res = await api.post("keeps", newKeep)
-        //dispatch("getMyKeeps")
         dispatch("getAllKeeps", "keeps/mykeeps")
       } catch (err) {
         alert(JSON.stringify(err));
