@@ -30,7 +30,6 @@ export default {
     };
   },
   mounted() {
-    //debugger
     let path = "vaults/" + this.$route.params.vaultId +"/keeps"
     this.$store.dispatch("getAllKeeps", path);
     this.$store.dispatch("getVaults");
@@ -47,18 +46,14 @@ export default {
     }
   },
   methods: {
-    // logout() {
-    //   this.$store.dispatch("logout");
+    // deleteKeep(id) {
+    //   this.$store.dispatch("deleteKeep", id);
     // },
-    deleteKeep(id) {
-      //console.log("deleteKeep", id);
-      this.$store.dispatch("deleteKeep", id);
-    },
-    addKeep() {
-      this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
-      this.$store.dispatch("addKeep", this.newKeep);
-      this.newKeep = {};
-    },
+    // addKeep() {
+    //   this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
+    //   this.$store.dispatch("addKeep", this.newKeep);
+    //   this.newKeep = {};
+    // },
     changeVault() {
       if (this.$route.params.vaultId != this.selected) {
         let path = "vaults/" + this.selected +"/keeps"

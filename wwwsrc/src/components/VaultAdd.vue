@@ -44,9 +44,6 @@ export default {
   },
   methods: {
     addVault() {
-      //this.$store.dispatch("addVault", this.newVault);
-      //                data.route            data.dispatch  data.path
-      //addVault        "vaults"              "getVaults"   <none>
       this.newVault.route = "vaults"
       this.newVault.dispatch = "getVaults"
       this.$store.dispatch("addAny", this.newVault);

@@ -45,18 +45,6 @@
         />
       </div>
 
-      <!-- <input type="checkbox" id="checkbox" v-model="newKeep.isPrivate" /> -->
-      <!-- <label for="checkbox">{{ checked }}</label> -->
-      <!-- <div class="form-group">
-        <label for="private">IsPrivate</label>
-        <input
-          type="number"
-          name="private"
-          class="form-control"
-          placeholder="Enter private...."
-          v-model="newKeep.isPrivate"
-        />
-      </div>-->
       <button type="submit" class="btn btn-primary">Add Keep</button>
     </form>
   </div>
@@ -71,22 +59,11 @@ export default {
     };
   },
   mounted() {
-    //this.$store.dispatch("getVaults");
   },
   computed: {
-    user() {
-      return this.$store.state.user;
-    }
-    // vaults() {
-    //   return this.$store.state.vaults;
-    // }
   },
   methods: {
     addKeep() {
-      //this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
-      //this.$store.dispatch("addKeep", this.newKeep);
-      //                data.route            data.dispatch  data.path
-      //addKeep         "keeps"               "getAllKeeps"  "keeps/mykeeps"
       this.newKeep.route = "keeps"
       this.newKeep.dispatch = "getAllKeeps"
       this.newKeep.path = "keeps/mykeeps"
@@ -94,7 +71,6 @@ export default {
       this.newKeep = {};
     }
   }
-  //components: { Vault }
 };
 </script>
 

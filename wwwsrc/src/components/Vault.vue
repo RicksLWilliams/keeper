@@ -15,8 +15,6 @@
           </button>
         </div>
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -30,20 +28,14 @@ export default {
   },
   methods: {
     deleteVault() {
-      //this.$store.dispatch("deleteVault", this.vaultData.id);
-      //                data.route            data.dispatch  data.path
-      //deleteVault     "vaults/" + id,       "getVaults",   ""
       let data = {}
       data.route = "vaults/" + this.vaultData.id
       data.dispatch = "getVaults"
       data.path = ""
-      console.log("deleteVault", data)
+      //console.log("deleteVault", data)
       this.$store.dispatch("deleteAny", data);
     },
     gotoVault(){
-      //debugger
-      //"$router.push({name: 'vault', params: {vaultId: vaultData.id}})"
-      //this.$store.dispatch("getVaultKeeps", this.vaultData.id);
       this.$router.push({name: 'vault', params: {vaultId: this.vaultData.id}})
     }
   },

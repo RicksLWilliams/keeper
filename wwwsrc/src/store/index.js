@@ -27,7 +27,7 @@ export default new Vuex.Store({
     setVaults(state, vaults) {
       state.vaults = vaults
     },
-    setAll(state, object) {
+    setAny(state, object) {
       state[object.name] = object.payload
     }
   },
@@ -50,21 +50,23 @@ export default new Vuex.Store({
         alert(JSON.stringify(err));
       }
     },
-
-    async editKeep({ commit, dispatch }, keepData) {
-      try {
-        let res = await api.put("keeps/" + keepData.id, keepData)
-        //dispatch("getKeeps")
-        dispatch("getAllKeeps", "keeps")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
     
+    //combine with getAllKeeps ?
     async getVaults({ commit, dispatch }, input) {
       try {
         let res = await api.get("vaults")
         commit("setVaults", res.data)
+      } catch (err) {
+        alert(JSON.stringify(err));
+      }
+    },
+
+    async editKeep({ commit, dispatch }, keepData) {
+      try {
+        let res = await api.put("keeps/" + keepData.id, keepData)
+        dispatch("getAllKeeps", "keeps")
+        //dispatch("getAllKeeps", "keeps/mykeeps")  //when at the dashboard
+        //dispatch("getAllKeeps", "vaults/" + id +"/keeps")  //when at the vaultDetails
       } catch (err) {
         alert(JSON.stringify(err));
       }
@@ -84,31 +86,6 @@ export default new Vuex.Store({
       }
     },
 
-    // async addKeep({ commit, dispatch }, newKeep) {
-    //   try {
-    //     let res = await api.post("keeps", newKeep)
-    //     dispatch("getAllKeeps", "keeps/mykeeps")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
-    // async addVault({ commit, dispatch }, newVault) {
-    //   try {
-    //     let res = await api.post("vaults", newVault)
-    //     dispatch("getVaults")
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
-    // async addVaultKeep({ commit, dispatch }, newVaultKeep) {
-    //   try {
-    //     let res = await api.post("vaultKeeps", newVaultKeep)
-    //   } catch (err) {
-    //     alert(JSON.stringify(err));
-    //   }
-    // },
-    //
-
     //                data.route            data.dispatch  data.path
     //addKeep         "keeps"               "getAllKeeps"  "keeps/mykeeps"
     //addVault        "vaults"              "getVaults"   <none>
@@ -116,7 +93,6 @@ export default new Vuex.Store({
     async addAny({ commit, dispatch }, data) {
       try {
         let res = await api.post(data.route, data)
-        //debugger
         if (data.dispatch){
           dispatch(data.dispatch, data.path)
         }
