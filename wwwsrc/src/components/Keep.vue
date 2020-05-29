@@ -90,13 +90,17 @@ export default {
       this.$store.dispatch("editKeep", keepData);
     },
     vaultKeep() {
-      //console.log("vaultKeep-vault", this.selected)
-      //console.log("vaultKeep-keep", this.keepData);
       let newVaultKeep = {};
       newVaultKeep.vaultId = this.selected;
       newVaultKeep.keepId = this.keepData.id;
-      this.$store.dispatch("addVaultKeep", newVaultKeep);
-      //this.editKeep("keeps");
+      //this.$store.dispatch("addVaultKeep", newVaultKeep);
+
+      newVaultKeep.route = "vaultKeeps";
+      //                data.route            data.dispatch  data.path
+      //addVaultKeep    "vaultKeeps"          <none>
+      //console.log("vaultKeep", newVaultKeep)
+      //debugger
+      this.$store.dispatch("addAny", newVaultKeep);
     }
   },
   computed: {

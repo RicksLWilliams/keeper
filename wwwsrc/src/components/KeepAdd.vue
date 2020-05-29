@@ -84,6 +84,12 @@ export default {
   methods: {
     addKeep() {
       //this.newKeep.isPrivate = this.newKeep.isPrivate == "0";
+      //this.$store.dispatch("addKeep", this.newKeep);
+      //                data.route            data.dispatch  data.path
+      //addKeep         "keeps"               "getAllKeeps"  "keeps/mykeeps"
+      this.newKeep.route = "keeps"
+      this.newKeep.dispatch = "getAllKeeps"
+      this.newKeep.path = "keeps/mykeeps"
       this.$store.dispatch("addKeep", this.newKeep);
       this.newKeep = {};
     }

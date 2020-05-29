@@ -84,30 +84,46 @@ export default new Vuex.Store({
       }
     },
 
-    async addKeep({ commit, dispatch }, newKeep) {
+    // async addKeep({ commit, dispatch }, newKeep) {
+    //   try {
+    //     let res = await api.post("keeps", newKeep)
+    //     dispatch("getAllKeeps", "keeps/mykeeps")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+    // async addVault({ commit, dispatch }, newVault) {
+    //   try {
+    //     let res = await api.post("vaults", newVault)
+    //     dispatch("getVaults")
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+    // async addVaultKeep({ commit, dispatch }, newVaultKeep) {
+    //   try {
+    //     let res = await api.post("vaultKeeps", newVaultKeep)
+    //   } catch (err) {
+    //     alert(JSON.stringify(err));
+    //   }
+    // },
+    //
+
+    //                data.route            data.dispatch  data.path
+    //addKeep         "keeps"               "getAllKeeps"  "keeps/mykeeps"
+    //addVault        "vaults"              "getVaults"   <none>
+    //addVaultKeep    "vaultKeeps"          <none>
+    async addAny({ commit, dispatch }, data) {
       try {
-        let res = await api.post("keeps", newKeep)
-        dispatch("getAllKeeps", "keeps/mykeeps")
+        let res = await api.post(data.route, data)
+        //debugger
+        if (data.dispatch){
+          dispatch(data.dispatch, data.path)
+        }
       } catch (err) {
         alert(JSON.stringify(err));
       }
     },
 
-    async addVault({ commit, dispatch }, newVault) {
-      try {
-        let res = await api.post("vaults", newVault)
-        dispatch("getVaults")
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
-
-    async addVaultKeep({ commit, dispatch }, newVaultKeep) {
-      try {
-        let res = await api.post("vaultKeeps", newVaultKeep)
-      } catch (err) {
-        alert(JSON.stringify(err));
-      }
-    },
   }
 });
