@@ -80,7 +80,7 @@ export default new Vuex.Store({
       try {
         //debugger
         let res = await api.delete(data.route);
-        this.dispatch(data.dispatch, data.path)
+        this.dispatch(data.dispatch, data.path);
       } catch (err) {
         alert(JSON.stringify(err));
       }
@@ -92,9 +92,9 @@ export default new Vuex.Store({
     //addVaultKeep    "vaultKeeps"          <none>
     async addAny({ commit, dispatch }, data) {
       try {
-        let res = await api.post(data.route, data)
+        let res = await api.post(data.route, data);
         if (data.dispatch){
-          dispatch(data.dispatch, data.path)
+          dispatch(data.dispatch, data.path);
         }
       } catch (err) {
         alert(JSON.stringify(err));

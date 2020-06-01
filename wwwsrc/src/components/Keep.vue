@@ -32,7 +32,7 @@
           :value="listInfo.id"
         >{{listInfo.name}}</option>
       </select>
->
+
       <button
         v-if="this.keepData.vaultKeepId"
         type="button"
