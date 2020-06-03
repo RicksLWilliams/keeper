@@ -57,6 +57,7 @@ export default {
     };
   },
   mounted() {
+    // make changes here
     let path = "vaults/" + this.$route.params.vaultId + "/keeps";
     this.$store.dispatch("getAllKeeps", path);
     this.$store.dispatch("getVaults");
