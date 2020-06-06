@@ -44,13 +44,32 @@ export default new Vuex.Store({
       //getMyKeeps    api.get("keeps/mykeeps")
       //getVaultKeeps api.get("vaults/" + id +"/keeps")
       try {
+        console.log("getAllKeeps", path)
+        console.log("getAllKeeps", router.currentRoute.fullPath)
+        switch (router.currentRoute.fullPath) {
+          case "/":
+            //do nothing path is correct
+            console.log("getAllKeeps/", path)
+            break;
+          case "/dashboard":
+            console.log("getAllKeeps/", "keeps/mykeeps")
+            path = "keeps/mykeeps"
+            break;
+
+          default:
+            //in the vault details
+            console.log("getAllKeeps", router.currentRoute.fullPath + "/keeps")
+            path = router.currentRoute.fullPath + "/keeps"
+            break;
+        }
+
         let res = await api.get(path)
         commit("setKeeps", res.data)
       } catch (err) {
         alert(JSON.stringify(err));
       }
     },
-    
+
     //combine with getAllKeeps ?
     async getVaults({ commit, dispatch }, input) {
       try {
@@ -93,7 +112,7 @@ export default new Vuex.Store({
     async addAny({ commit, dispatch }, data) {
       try {
         let res = await api.post(data.route, data);
-        if (data.dispatch){
+        if (data.dispatch) {
           dispatch(data.dispatch, data.path);
         }
       } catch (err) {

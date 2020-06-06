@@ -36,7 +36,7 @@ export default {
       this.$store.dispatch("deleteAny", data);
     },
     gotoVault(){
-      this.$router.push({name: 'vault', params: {vaultId: this.vaultData.id}})
+      this.$router.push({name: 'vaults', params: {vaultId: this.vaultData.id}})
     }
   },
 };

@@ -59,7 +59,7 @@ export default {
         let path = "vaults/" + this.selected +"/keeps"
         this.$store.dispatch("getAllKeeps", path);
         this.$router.push({
-          name: "vault",
+          name: "vaults",
           params: { vaultId: this.selected }
         });
       }

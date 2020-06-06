@@ -69,6 +69,7 @@ export default {
       let keepData = {};
       keepData["id"] = this.keepData.id;
       keepData[data] = 1;
+      console.log("editKeep",  this.$router.currentRoute)
       this.$store.dispatch("editKeep", keepData);
     },
     vaultKeep() {
@@ -76,6 +77,7 @@ export default {
       newVaultKeep.vaultId = this.selected;
       newVaultKeep.keepId = this.keepData.id;
       newVaultKeep.route = "vaultKeeps";
+      console.log("vaultKeep",  this.$router.currentRoute)
       this.$store.dispatch("addAny", newVaultKeep);
     }
   },
