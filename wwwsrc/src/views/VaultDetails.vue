@@ -13,11 +13,7 @@
       >{{listInfo.name}}</option>
     </select>
 
-    <button
-      type="button"
-      class="btn btn-primary"
-      @click="nextVault(1)"
-    >Next</button>
+    <button type="button" class="btn btn-primary" @click="nextVault(1)">Next</button>
 
     <div class="row justify-content-center">
       <keep v-for="keep in keeps" :keepData="keep" :key="keep.vaultKeepid"></keep>
@@ -63,7 +59,7 @@ export default {
     changeVault() {
       if (this.$route.params.vaultId != this.selected) {
         let path = "vaults/" + this.selected + "/keeps";
-        console.log("changeVault", path)
+        console.log("changeVault", path);
         this.$store.dispatch("getAllKeeps", path);
         this.$router.push({
           name: "vaults",
@@ -72,25 +68,28 @@ export default {
       }
     },
     nextVault(num) {
-      let vaultIndex = 0
-      let loopVault = {}
-       for (let i = 0; i < this.listItems.length; i++){
-         loopVault = this.listItems[i]
-         if (this.$route.params.vaultId == loopVault.id) {
-           vaultIndex = i
-         }
-       }
-       console.log("nextVault", vaultIndex);
-       vaultIndex = (vaultIndex + num + this.listItems.length ) %  this.listItems.length
-       console.log("nextVault", vaultIndex);
+      let vaultIndex = 0;
+      let loopVault = {};
+      for (let i = 0; i < this.listItems.length; i++) {
+        loopVault = this.listItems[i];
+        if (this.$route.params.vaultId == loopVault.id) {
+          vaultIndex = i;
+        }
+      }
 
-        let path = "vaults/" + this.listItems[vaultIndex].id + "/keeps";
-        this.$store.dispatch("getAllKeeps", path);
-        this.$router.push({
-          name: "vaults",
-          params: { vaultId: this.listItems[vaultIndex].id }
-        });
+      //  this.selected = this.listItems[vaultIndex].id
+      //  this.changeVault()
+      //console.log("nextVault", vaultIndex);
+      vaultIndex =
+        (vaultIndex + num + this.listItems.length) % this.listItems.length;
+      //console.log("nextVault", vaultIndex);
 
+      let path = "vaults/" + this.listItems[vaultIndex].id + "/keeps";
+      this.$store.dispatch("getAllKeeps", path);
+      this.$router.push({
+        name: "vaults",
+        params: { vaultId: this.listItems[vaultIndex].id }
+      });
     }
   },
   components: { Keep }
