@@ -44,22 +44,22 @@ export default new Vuex.Store({
       //getMyKeeps    api.get("keeps/mykeeps")
       //getVaultKeeps api.get("vaults/" + id +"/keeps")
       try {
-        console.log("getAllKeeps", path)
-        console.log("getAllKeeps", router.currentRoute.fullPath)
+        //console.log("getAllKeeps", path)
+        //console.log("getAllKeeps", router.currentRoute.fullPath)
         switch (router.currentRoute.fullPath) {
           case "/":
             //do nothing path is correct
-            console.log("getAllKeeps/", path)
+            //console.log("getAllKeeps/", path)
             break;
           case "/dashboard":
-            console.log("getAllKeeps/", "keeps/mykeeps")
+            //console.log("getAllKeeps/", "keeps/mykeeps")
             path = "keeps/mykeeps"
             break;
 
           default:
             //in the vault details
             console.log("getAllKeeps", router.currentRoute.fullPath + "/keeps")
-            path = router.currentRoute.fullPath + "/keeps"
+            //path = router.currentRoute.fullPath + "/keeps"
             break;
         }
 
