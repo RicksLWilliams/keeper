@@ -51,6 +51,16 @@ export default {
   methods: {
     // need method for router.push code 
     //call from changeVault and nextVault
+    pushVault(vaultId){
+        let path = "vaults/" + vaultId + "/keeps";
+        //console.log("changeVault", path);
+        this.$store.dispatch("getAllKeeps", path);
+        this.$router.push({
+          name: "vaults",
+          params: { vaultId: vaultId }
+        });
+    },
+
     changeVault() {
       if (this.$route.params.vaultId != this.selected) {
         let path = "vaults/" + this.selected + "/keeps";
