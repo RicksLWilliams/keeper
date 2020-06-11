@@ -63,33 +63,24 @@ export default {
 
     changeVault() {
       if (this.$route.params.vaultId != this.selected) {
-        let path = "vaults/" + this.selected + "/keeps";
-        console.log("changeVault", path);
-        this.$store.dispatch("getAllKeeps", path);
-        this.$router.push({
-          name: "vaults",
-          params: { vaultId: this.selected }
-        });
+        //console.log("changeVault")
+        this.pushVault(this.selected)
       }
     },
     nextVault(num) {
       let vaultIndex = 0;
-      let loopVault = {};
+      //let loopVault = {};
       for (let i = 0; i < this.listItems.length; i++) {
-        loopVault = this.listItems[i];
-        if (this.$route.params.vaultId == loopVault.id) {
+        //loopVault = this.listItems[i];
+        if (this.$route.params.vaultId == this.listItems[i].id) {
+      //if (this.$route.params.vaultId == loopVault.id) {
           vaultIndex = i;
         }
       }
       vaultIndex =
         (vaultIndex + num + this.listItems.length) % this.listItems.length;
 
-      let path = "vaults/" + this.listItems[vaultIndex].id + "/keeps";
-      this.$store.dispatch("getAllKeeps", path);
-      this.$router.push({
-        name: "vaults",
-        params: { vaultId: this.listItems[vaultIndex].id }
-      });
+      this.pushVault(this.listItems[vaultIndex].id)
     }
   },
   components: { Keep }

@@ -57,8 +57,9 @@ export default new Vuex.Store({
             break;
 
           default:
+            //do nothing path is correct
             //in the vault details
-            console.log("getAllKeeps", router.currentRoute.fullPath + "/keeps")
+            //console.log("getAllKeeps", router.currentRoute.fullPath + "/keeps")
             //path = router.currentRoute.fullPath + "/keeps"
             break;
         }
