@@ -7,7 +7,7 @@
         </button>
       </div>
       <h1>{{keepData.name}}</h1>
-      <img :src="keepData.img" class="img-fluid" alt srcset />
+      <img :src="keepData.img" class="img-fluid" alt srcset @click="keepDetails()" />
       <h2>{{keepData.description}}</h2>
       <h5>{{keepData.userId}}</h5>
       <h5>isPrivate: {{keepData.isPrivate}}</h5>
@@ -69,7 +69,7 @@ export default {
       let keepData = {};
       keepData["id"] = this.keepData.id;
       keepData[data] = 1;
-      console.log("editKeep",  this.$router.currentRoute)
+      //console.log("editKeep",  this.$router.currentRoute)
       this.$store.dispatch("editKeep", keepData);
     },
     vaultKeep() {
@@ -77,8 +77,13 @@ export default {
       newVaultKeep.vaultId = this.selected;
       newVaultKeep.keepId = this.keepData.id;
       newVaultKeep.route = "vaultKeeps";
-      console.log("vaultKeep",  this.$router.currentRoute)
+      //console.log("vaultKeep",  this.$router.currentRoute)
       this.$store.dispatch("addAny", newVaultKeep);
+    },
+    keepDetails(){
+      console.log("keepDetails",this.keepData.id )
+      //this.keepData.id
+      this.$router.push({name: 'keepdetails', params: {keepId: this.keepData.id}})
     }
   },
   computed: {

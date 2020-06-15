@@ -53,14 +53,18 @@ export default {
   data() {
     return {
       newKeep: {},
-      selected: ""
+      selected: "",
+      keepData:{}
     };
   },
   mounted() {
     // make changes here
-    let path = "vaults/" + this.$route.params.vaultId + "/keeps";
-    this.$store.dispatch("getAllKeeps", path);
-    this.$store.dispatch("getVaults");
+    //let path = "vaults/" + this.$route.params.vaultId + "/keeps";
+    //this.$store.dispatch("getAllKeeps", path);
+    //this.$store.dispatch("getVaults");
+    
+    //loop through keeps looking for id = this.$route.params.keepId
+    //then set keepData to that one
   },
   computed: {
     user() {
