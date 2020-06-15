@@ -58,13 +58,23 @@ export default {
     };
   },
   mounted() {
+    //created() {
     // make changes here
     //let path = "vaults/" + this.$route.params.vaultId + "/keeps";
     //this.$store.dispatch("getAllKeeps", path);
     //this.$store.dispatch("getVaults");
-    
+
     //loop through keeps looking for id = this.$route.params.keepId
     //then set keepData to that one
+    for (let i = 0; i < this.keeps.length; i++){
+      //console.log("mounted", i)
+      //console.log("mounted", this.keeps)
+      //console.log("mounted", this.$route.params.keepId)
+      let curKeep = this.keeps[i]
+      if (curKeep.id == this.$route.params.keepId ){
+        this.keepData = curKeep
+      }
+    }
   },
   computed: {
     user() {
