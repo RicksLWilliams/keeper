@@ -1,7 +1,8 @@
 <template>
   <div class="home container-fluid">
     <h1>Vault Details</h1>
-    <div class="col-3 m-3 border rounded">
+    <div class="row text-center">
+    <div class="col-10 m-3 border rounded">
       <div>
         <div v-if="this.userId == this.keepData.userId && this.keepData.isPrivate">
           <button type="button" class="close text-danger" @click="deleteKeep()">
@@ -42,6 +43,7 @@
           @click="deleteVaultKeep()"
         >Remove({{keepData.vaultKeepId}})</button>
       </div>
+    </div>
     </div>
   </div>
 </template>
