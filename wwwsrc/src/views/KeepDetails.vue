@@ -10,6 +10,7 @@
           </button>
         </div>
         <h1>{{keepData.name}}</h1>
+        <h1>{{keepData.id}}</h1>
         <img :src="keepData.img" class="img-fluid" alt srcset />
         <h2>{{keepData.description}}</h2>
         <h5>{{keepData.userId}}</h5>
@@ -81,6 +82,12 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    userId() {
+      if (!this.$auth.userInfo.sub) {
+        return "";
+      }
+      return this.$auth.userInfo.sub;
     },
     keeps() {
       return this.$store.state.keeps;

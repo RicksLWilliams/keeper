@@ -13,7 +13,7 @@
       >{{listInfo.name}}</option>
     </select>
 
-    <button type="button" class="btn btn-primary" @click="nextVault(11)">Previous</button>
+    <button type="button" class="btn btn-primary" @click="nextVault(-1)">Previous</button>
     <button type="button" class="btn btn-primary" @click="nextVault(1)">Next</button>
 
     <div class="row justify-content-center">
@@ -40,6 +40,12 @@ export default {
   computed: {
     user() {
       return this.$store.state.user;
+    },
+    userId() {
+      if (!this.$auth.userInfo.sub) {
+        return "";
+      }
+      return this.$auth.userInfo.sub;
     },
     keeps() {
       return this.$store.state.keeps;
