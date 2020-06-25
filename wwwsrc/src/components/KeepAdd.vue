@@ -67,7 +67,7 @@ export default {
       this.newKeep.route = "keeps"
       this.newKeep.dispatch = "getAllKeeps"
       this.newKeep.path = "keeps/mykeeps"
-      this.$store.dispatch("addKeep", this.newKeep);
+      this.$store.dispatch("addAny", this.newKeep);
       this.newKeep = {};
     }
   }
