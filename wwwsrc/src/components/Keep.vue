@@ -81,7 +81,7 @@ export default {
       this.$store.dispatch("addAny", newVaultKeep);
     },
     keepDetails(){
-      console.log("keepDetails",this.keepData.id )
+      //console.log("keepDetails",this.keepData.id )
       //this.keepData.id
       this.$router.push({name: 'keepdetails', params: {keepId: this.keepData.id}})
     }
