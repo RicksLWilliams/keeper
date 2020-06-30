@@ -9,8 +9,8 @@
       <option v-for="keepInfo in keeps" :key="keepInfo.id" :value="keepInfo.id">{{keepInfo.name}}</option>
     </select>
 
-    <button type="button" class="btn btn-primary" @click="nextVault(-1)">Previous</button>
-    <button type="button" class="btn btn-primary" @click="nextVault(1)">Next</button>
+    <button type="button" class="btn btn-primary" @click="nextKeep(-1)">Previous</button>
+    <button type="button" class="btn btn-primary" @click="nextKeep( 1)">Next</button>
 
     <div class="row text-center">
       <div class="col-10 m-3 border rounded">
@@ -72,7 +72,7 @@ export default {
     };
   },
   mounted() {
-    this.findKeep()
+    this.findKeep();
   },
   computed: {
     user() {
@@ -100,11 +100,11 @@ export default {
     pushKeep(keepId) {
       console.log("pushKeep", this.$router.options.routes);
       //loop through this.$router.options.routes and populate
-      //this.$store.dispatch("getAllKeeps", path); 
+      //this.$store.dispatch("getAllKeeps", path);
       //this.$store.dispatch("myKeeps", path);
       //this.$store.dispatch("vaultKeeps", path);
       this.$router.push({ name: "keepdetails", params: { keepId: keepId } });
-      this.findKeep()
+      this.findKeep();
     },
     findKeep() {
       for (let i = 0; i < this.keeps.length; i++) {
@@ -113,6 +113,18 @@ export default {
           this.keepData = curKeep;
         }
       }
+    },
+    nextKeep(offset) {
+      let keepIndex = 0;
+      for (let i = 0; i < this.keeps.length; i++) {
+        if (this.$route.params.keepId == this.keeps[i].id) {
+          keepIndex = i;
+        }
+      }
+      keepIndex =
+        (keepIndex + offset + this.keeps.length) % this.keeps.length;
+
+      this.pushKeep(this.keeps[keepIndex].id);
     }
   },
   components: { Keep }
