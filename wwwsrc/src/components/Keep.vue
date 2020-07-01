@@ -14,7 +14,7 @@
       <button
         type="button"
         class="btn btn-primary"
-        @click="editKeep('views')"
+        @click="keepDetails()"
       >View({{keepData.views}})</button>
       <button
         type="button"
@@ -83,6 +83,7 @@ export default {
     keepDetails(){
       //console.log("keepDetails",this.keepData.id )
       //this.keepData.id
+      this.editKeep('views')
       this.$router.push({name: 'keepdetails', params: {keepId: this.keepData.id}})
     }
   },
